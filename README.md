@@ -1,120 +1,86 @@
-# Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench
-My analysis process for the Coursera project "Analyze Data in a Model Car Database with MySQL Workbench". 
+# Analyze Data in a Model Car Database with MySQL Workbench
 
-In this project, I will assist in the analysis of data in a relational database as an entry-level data analyst at the Mint Classics Company in order to support business choices regarding inventory that result in the closure of a storage facility.
+This project is part of my Coursera coursework where I analyze data from Mint Classics, a classic model car retailer, to support business decisions on inventory management and warehouse consolidation.
 
-Working on this project allowed me to show off my proficiency with SQL and its application to efficient inventory management. My aim was to demonstrate how to evaluate warehouse data, comprehend the distribution of product inventories, and offer useful recommendations for enhancing inventory control. 
+## Project Overview
+Mint Classics is planning to close one of its storage facilities. Using SQL in MySQL Workbench, I explored the company’s inventory and sales data to provide data-driven recommendations that improve efficiency and reduce costs.
 
-Through this project, I wanted to demonstrate my ability for data-driven decision-making, which will increase the strategic and operational effectiveness of inventory management.
+---
 
-#Project Objectives
+## Project Objectives
+1. Explore current inventory products.
+2. Identify key factors affecting inventory reorganization.
+3. Provide analytical insights and actionable recommendations.
 
-##1. Explore products currently in inventory.
+---
 
-##2. Determine important factors that may influence inventory reorganization/reduction.
+## Approach & Tasks
 
-##3. Provide analytic insights and data-driven recommendations.
+### Task 1 – Import Database  
+Imported the `mintclassicsDB.sql` script into MySQL Workbench to create the relational database with nine tables containing warehouse, product, sales, and inventory data.
 
-**Task 1 - Import Classic Car Model Database**
+![Import database screenshot](https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/blob/main/Picture1.png)
 
-   Download the mintclassicsDB.sql file that contains the script to create and populate the Mint Classics relational database.  
-   Using the "Import from Self-Contained File" option from the Data Import tool, use the script to create the Mint Classic database on your MySQL Workbench platform. 
-   The script includes commands to create the schema (called "mintclassics"), along with the tables and fields, primary and foreign keys, and the data. 
-   When the script has run successfully you will have a working relational nine-table database populated with data from the Mint Classics company.![image](https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/blob/main/Picture1.png)
+---
 
-**Task 2 - Understanding the Mint Classics Database and Its Business Processes**
+### Task 2 – Understand the Data & Business Process  
+- Identified 4 warehouses with varying capacities.
 
-- Identify the total number of warehouses and their capacity.
-  
-  <img width="288" alt="Screenshot 2024-03-10 at 5 56 56 PM" src="https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/8a3f07be-6bd9-4b54-a720-69b968a714fd">
-  
-  => There are four warehouses, each with its unique code, name, and current capacity in percent. Among them, Warehouse C stands out with ample space, currently filled at only 50%.
+![Warehouses and capacities](https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/8a3f07be-6bd9-4b54-a720-69b968a714fd)
 
-- Identify the total of products offered by this company.
+- Counted 110 unique products in inventory.
+- Found no product overlap between warehouses.
+- Analyzed product lines per warehouse and their stock levels.
 
-   => The company currently holds a diverse inventory of 110 distinct products.
+![Products per warehouse and stock](https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/da317085-f42e-4ccf-8706-4aaeb0ef60bd)
 
-- Determine if any products are stored in multiple warehouses.
+- Identified product lines stored in each warehouse.
 
-   => No products are stored across multiple warehouses. Thus, it's evident that each warehouse exclusively stores specific product lines.
+![Product lines by warehouse](https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/a8b4dd7d-c174-490c-bdc9-50f6f99ee6ed)
 
-- Identify the unique product count and total stock in each warehouse.
+- Determined product lines with highest and lowest sales.
 
-  <img width="386" alt="Screenshot 2024-03-10 at 6 03 49 PM" src="https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/da317085-f42e-4ccf-8706-4aaeb0ef60bd">
+![Sales by product line](https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/9e7a5aa9-4153-4265-98d8-a638eb352c03)
 
-   => Warehouse B boasts an impressive inventory, housing a total of 38 different products with a combined stock of 219.183 units, making it the warehouse with the highest storage capacity.
+---
 
-- Identify which product lines are stored in each warehouse.
+### Task 3 – Business Issue Investigation  
+Created a temporary table to compare stock against orders to classify products as overstocked, well-stocked, or understocked by warehouse.
 
-  <img width="479" alt="Screenshot 2024-03-10 at 6 06 42 PM" src="https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/a8b4dd7d-c174-490c-bdc9-50f6f99ee6ed">
+![Temporary table for inventory status](https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/818f2029-45dc-43d4-9b40-980dd44d9476)
 
-        Warehouse A (North): Planes + Motorcycles
-  
-         12 planes, 13 motorcycles = 25 total products
-  
-        Warehouse B (East): Classic Cars
+Identified overstock quantities per warehouse:
 
-         38 total products for classic cars
+![Overstock by warehouse](https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/324eb642-670e-4641-87fe-18c1f1117f65)
 
-        Warehouse C (West): Vintage Cars
+![More overstock data](https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/292ea044-697b-4f65-8f9c-8134f6a27eed)
 
-         24 total products for vintage cars
+Warehouse B had the highest overstocked products (29), while Warehouses A and C each had 19 overstocked items.
 
-        Warehouse D (South): Trucks + Buses, Ships, Trains
+Analyzed sales percentages and inventory for each product line:
 
-         11 trucks + buses, 9 ships, 3 trains = 23 total
+![Product line sales and inventory](https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/e3334e33-c601-46d5-b65f-42699a57995a)
 
-- Determine the product lines with the highest and lowest number of sales.
-  
-<img width="204" alt="23" src="https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/9e7a5aa9-4153-4265-98d8-a638eb352c03">
+---
 
-  
+### Task 4 – Warehouse Consolidation Recommendation  
 
-**Task 3 - Investigating Business Issues and Identifying Affected Tables**
+- Warehouse B holds Classic Cars, has the highest capacity, but suffers from overstock and lower sales.  
+- Warehouse C has the lowest utilization (50%) and storage capacity, indicating wasted space.  
 
+**Recommendation:** Close Warehouse C and relocate its inventory to Warehouse B.
 
-   I am going to look into Mint Classics' business problem, which is that company wants to close one of its warehouses. I will determine which tables are relevant to the problem and use SQL queries to obtain the required information.
-   Let's create a temporary table to evaluate the difference between our product stock and the inventory that remains after fulfillment (shipped and resolved orders). This table will be a useful resource for identifying overstock, appropriately stocked commodities, and understock conditions.
-   
-   <img width="468" alt="image" src="https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/818f2029-45dc-43d4-9b40-980dd44d9476">
-   
-   Then, determine the quantity of products that are wellstocked, overstocked and understocked in each warehouse.
-   
-   
-   <img width="299" alt="image" src="https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/324eb642-670e-4641-87fe-18c1f1117f65">
-   
+**Benefits:**  
+- Optimized space usage leveraging Warehouse B's capacity.  
+- Streamlined inventory management with fewer locations.  
+- Cost savings on operational expenses.
 
-   <img width="299" alt="image" src="https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/292ea044-697b-4f65-8f9c-8134f6a27eed">
-   
+---
 
-   => It appears that Warehouse B has the highest quantity of overstocked products, totaling 29 items, while both Warehouse A and Warehouse C have the same number of overstocked products, amounting to 19 each.
+## Summary
 
-   Subsequently, we can analyze various product lines, identifying those with the highest sales percentages, and gain insights into each product line's inventory and sales performance.
+This project showcases my SQL expertise and ability to use data-driven insights to optimize inventory and warehouse management strategies.
 
-<img width="468" alt="image" src="https://github.com/thienhuongdn2002/Analyze-Data-in-a-Model-Car-Database-with-MySQL-Workbench/assets/144947062/e3334e33-c601-46d5-b65f-42699a57995a">
+---
 
-**Task 4**
-**Warehouse Consolidation Recommendation:**
-
-Upon analysis, it is evident that warehouse B houses the Classic cars, which exhibits the lowest sales performance and the highest quantity of overstocked products. However, despite these challenges, warehouse B boasts an impressive inventory, accommodating a total of 38 different products with a combined stock of 219,183 units. This establishes warehouse B as the facility with the highest storage capacity within our network.
-
-Conversely, Warehouse C presents a stark contrast with the lowest storage capacity among the four warehouses. Furthermore, Warehouse C currently operates at just 50% capacity, indicating a significant amount of unused space. This underutilization of resources represents a potential waste for the company.
-
-Considering these factors, it is recommended to close warehouse C and reallocate its inventory to warehouse B. This strategic consolidation not only maximizes the utilization of warehouse B's ample storage space but also streamlines inventory management by bringing together similar product line categories under one roof.
-
-This consolidation initiative offers the following benefits:
-
-1. **Optimized Space Utilization:** By redistributing inventory from warehouse C to warehouse B, we capitalize on the latter's extensive storage capacity, effectively utilizing available space and minimizing operational inefficiencies.
-
-2. **Streamlined Operations:** Consolidating warehouses simplifies inventory management processes, reducing complexity and enhancing overall operational efficiency. Managing similar product lines within a single facility facilitates streamlined logistics and inventory control.
-
-3. **Cost Savings:** The consolidation eliminates redundant overhead costs associated with maintaining multiple warehouses, leading to potential cost savings in operational expenditures and facility maintenance.
-
-In conclusion, the consolidation of warehouse C's inventory into warehouse B presents a strategic opportunity to enhance efficiency, reduce costs, and optimize inventory management practices. This recommendation aligns with our objective of maximizing operational effectiveness and leveraging resources for sustained growth and success.
-
-
-   
-
-
-
-
+Feel free to explore the repository for queries, analysis scripts, and detailed findings.
